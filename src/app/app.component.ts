@@ -11,34 +11,29 @@ export class AppComponent {
   url = 'https://google.com';
   param = '16217';
 
-  ngEncode(param: string) {
-    return this.codec.encodeValue(btoa(param));
+  encodeUrlParam(param: string) {
+    return this.codec.encodeValue(this.encrpytParam(param));
   }
 
-  ngDecode(param: string) {
-    return this.codec.decodeValue(atob(this.ngEncode(param)));
+  decodeUrlParam(param: string) {
+    return this.codec.decodeValue(this.decryptParam(this.encodeUrlParam(param)));
+  }
+
+  encrpytParam(param: string) {
+    return btoa(param);
+  }
+
+  decryptParam(param: string) {
+    return atob(param);
   }
 
   ngUrl() {
-    return this.url + '/' + this.ngEncode(this.param);
+    return this.url + '/' + this.encodeUrlParam(this.param);
   }
 
-  jsEncode(param: string) {
-    return encodeURIComponent(btoa(param));
-  }
-
-  jsDecode(param: string) {
-    console.log(atob(this.jsEncode(param)));
-    return decodeURIComponent(atob(this.jsEncode(param)));
-  }
-
-  jsUrl() {
-    return this.url + '/' + this.jsEncode(this.param);
-  }
-
-  isValidUrl(encodedValue) {
+  isValidUrl() {
     try {
-      new URL(this.url + '/' + encodedValue);
+      new URL(this.ngUrl());
     } catch (e) {
       console.error(e);
       return false;

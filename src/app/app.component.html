@@ -1,11 +1,7 @@
 <label>Param: <input type="text" [(ngModel)]="param" /></label>
 <br />
 <p>Angular Url: {{ ngUrl() }}</p>
-<p>Angular encode: {{ ngEncode(param) }}</p>
-<p>Angular Valid Url: {{ isValidUrl(ngEncode(param)) }}</p>
-<p>Angular decode: {{ ngDecode(param) }}</p>
+<p>Angular encode: {{ encodeUrlParam(param) }}</p>
+<p>Angular Valid Url: {{ isValidUrl() }}</p>
+<p>Angular decode: {{ decodeUrlParam(param) }}</p>
 <br />
-<p>JS Url: {{ jsUrl() }}</p>
-<p>JS encode: {{ jsEncode(param) }}</p>
-<p>JS Valid Url: {{ isValidUrl(jsEncode(param)) }}</p>
-<p>JS decode: {{ jsDecode(param) }}</p>
